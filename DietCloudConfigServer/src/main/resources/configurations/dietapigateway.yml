@@ -1,0 +1,30 @@
+eureka:
+  client:
+    register-with-eureka: false
+server:
+  port: 8222
+spring:
+  application:
+    name: dietapigateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: reviewservice
+          uri: http://localhost:9096
+          predicates:
+            - Path=/review/**
+        - id: exerciseservice
+          uri: http://localhost:9097
+          predicates:
+            - Path=/exercise/**
+        - id: dietservice
+          uri: http://localhost:9098
+          predicates:
+            - Path=/diet/**
+        - id: userservice
+          uri: http://localhost:9099
+          predicates:
+            - Path=/user/**
